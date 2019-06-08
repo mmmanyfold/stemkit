@@ -4,7 +4,6 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import {Request, Response} from "express";
 import {Routes} from "./routes";
-import {Activity} from "./entity/Activity";
 
 createConnection().then(async connection => {
 
@@ -32,19 +31,19 @@ createConnection().then(async connection => {
     app.listen(3000);
 
     // insert new activities
-    await connection.manager.save(connection.manager.create(Activity, {
+    await connection.manager.save(connection.manager.create("Activity", {
         name: "Binary Necklace",
         min_duration: 15,
         age: "All ages",
         group_size: "Any size"
     }));
-    await connection.manager.save(connection.manager.create(Activity, {
+    await connection.manager.save(connection.manager.create("Activity", {
         name: "Crime Lab",
         min_duration: 25,
         age: "Middle School, High School",
         group_size: "25"
     }));
 
-    console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
+    console.log("Express server has started on port 3000. Open http://localhost:3000/activity to see results");
 
 }).catch(error => console.log(error));

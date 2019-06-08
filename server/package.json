@@ -4,6 +4,8 @@
    "description": "Awesome project developed with TypeORM.",
    "devDependencies": {
       "@types/node": "^8.10.48",
+      "eslint": "^5.16.0",
+      "eslint-plugin-react": "^7.13.0",
       "ts-node": "3.3.0",
       "typescript": "3.3.3333"
    },
