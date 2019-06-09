@@ -4,6 +4,8 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import {Request, Response} from "express";
 import {Routes} from "./routes";
+import { Subcategory } from "./entity/Subcategory";
+import { Image } from "./entity/Image";
 
 createConnection().then(async connection => {
 
@@ -29,19 +31,25 @@ createConnection().then(async connection => {
 
     // start express server
     app.listen(3000);
+    
+    const s1 = new Subcategory();
+    s1.name = "computer science";
+
+    const s2 = new Subcategory();
+    s2.name = "number systems";
+
+    const i1 = new Image();
+    i1.url = "foo";
 
     // insert new activities
     await connection.manager.save(connection.manager.create("Activity", {
         name: "Binary Necklace",
+        categories: ["technology", "math"],
+        subcategories: [s1, s2],
         min_duration: 15,
-        age: "All ages",
-        group_size: "Any size"
-    }));
-    await connection.manager.save(connection.manager.create("Activity", {
-        name: "Crime Lab",
-        min_duration: 25,
-        age: "Middle School, High School",
-        group_size: "25"
+        age_groups: ["All ages"],
+        max_group_size: "Any size",
+        image: i1,
     }));
 
     console.log("Express server has started on port 3000. Open http://localhost:3000/activity to see results");

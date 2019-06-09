@@ -1,5 +1,6 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToOne, JoinColumn} from "typeorm";
 import {Subcategory} from "./Subcategory";
+import {Image} from "./Image";
 
 @Entity()
 export class Activity {
@@ -24,9 +25,10 @@ export class Activity {
     age_groups: string[];
 
     @Column()
-    max_group_size: number;
+    max_group_size: string;
 
-    @Column()
-    image: string;
+    @OneToOne(type => Image)
+    @JoinColumn()
+    image: Image;
 
 }
